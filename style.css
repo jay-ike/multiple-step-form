@@ -210,17 +210,18 @@ input[type="radio"]:not(:checked) + .toggle-label {
   stroke-dasharray: 1;
   z-index: -1;
 }
-
 .addon {
-  --primary-clr: var(--purple-blue);
-  color: var(--marine-blue);
-  border-radius: 0.5rem;
-  border: 1px solid var(--light-gray);
-  padding-inline: 1rem;
-  padding-block: 0.5rem;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+	--primary-clr: var(--purple-blue);
+	color: var(--marine-blue);
+	border-radius: 0.5rem;
+	border: 1px solid var(--light-gray);
+	padding-inline: 1rem;
+	padding-block: 0.5rem;
+	display: grid;
+	grid-template-areas: "check label cost";
+	gap: .5rem;
+	grid-template-columns: .5fr 5fr 1fr;
+	align-items: center;
 }
 
 .addon-active {
@@ -287,7 +288,7 @@ input[type="radio"]:not(:checked) + .toggle-label {
 	margin: 0;
 	border: none;
 	padding-inline: 0.25rem;
-	transform: translateX(calc(var(--i) * 100%));
+	/* transform: translateX(calc(var(--i) * 100%));*/
 }
 
 .column > * + * {
@@ -333,10 +334,27 @@ input[type="text"] {
   border-radius: 0.5rem;
   padding-block: 0.5rem;
   padding-inline: 1rem;
-  display: flex;
-  flex-flow: row wrap;
-  align-items: start;
-  gap: 1rem;
+  display: grid;
+  grid-template-areas: "img title"
+                        "img  cost"
+                        ".  discount";
+
+  gap: .25rem;
+  text-align: start;
+  grid-template-columns: 1fr 5fr;
+
+}
+
+.plan__img {
+    grid-area: img;
+}
+
+.plan__cost {
+    grid-area: cost;
+}
+
+.plan__discount {
+    grid-area: discount;
 }
 
 .btn-primary {
@@ -356,6 +374,7 @@ input[type="text"] {
 .plan__title {
   color: var(--marine-blue);
   font-size: 1rem;
+  grid-area: title;
 }
 
 .primary-clr {
