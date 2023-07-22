@@ -61,6 +61,10 @@ ol[class] {
   --alabaster-clr: hsl(231, 100%, 99%);
   --white: hsl(0, 0%, 100%);
   --elastic-timing: cubic-bezier(.25, .1, .3, 1.5);
+  --f-grid-areas: "indicators   indicators  indicators"
+                  ".    steps   ."
+                  "nav  nav nav";
+  --indicator-bg: url(assets/images/bg-sidebar-mobile.svg);
 }
 
 .visually-hidden {
@@ -86,12 +90,15 @@ legend {
 
 .form {
 	--neg-margin: -3rem;
-	display: flex;
-	flex-flow: column nowrap;
+	display: grid;
+	grid-template-areas: var(--f-grid-areas);
+	grid-template-columns: 1rem 3fr 1rem;
+	gap: 1rem;
+	grid-template-rows: .35fr minmax(5rem, 3fr) .35fr;
 	min-height: 100vh;
 }
 
-.indicators.indicators {
+.indicators.indicators { grid-area: indicators;
   display: flex;
   justify-content: space-evenly;
   align-content: start;
@@ -99,7 +106,7 @@ legend {
   margin-inline: 0;
   margin-block: 0 var(--neg-margin);
   padding-block-start: 1rem;
-  background: url(assets/images/bg-sidebar-mobile.svg) center/cover no-repeat;
+  background: var(--purple-blue) var(--indicator-bg) center/cover no-repeat;
 }
 
 .step-active {
@@ -108,11 +115,16 @@ legend {
 	--bd-clr: var(--light-blue);
 }
 
-.step-indicator {
-  counter-increment: indicator_index;
+.s-indicator {
+	counter-increment: indicator_index;
+	display: inline-grid;
+	grid-template-areas: ". description";
+	gap: .5rem;
+	grid-template-columns: minmax(2rem, .25fr) 5fr;
+	container: indicator / inline-size;
 }
 
-.step-indicator::before {
+.s-indicator::before {
 	content: counter(indicator_index);
 	width: 2rem;
 	aspect-ratio: 1;
@@ -137,6 +149,15 @@ legend {
   background-color: var(--alabaster-clr);
   border-radius: 0.5rem;
 }
+
+.toggle-label {
+    flex: 2;
+}
+
+.toggle-label:first-of-type {
+    text-align: end;
+}
+
 .toggle-wrapper > .toggle-label:last-of-type {
   order: 1;
 }
@@ -254,8 +275,22 @@ input[type="radio"]:not(:checked) + .toggle-label {
   color: var(--primary-clr);
 }
 
-.step-indicator > p:only-child {
-  display: none;
+.s-indicator__desc:only-child {
+	display: none;
+	font-family: "Ubuntu-Bold";
+	color: var(--white);
+	font-weight: 700;
+	text-transform: uppercase;
+    /*for fallback when container query is not supported*/
+    font-size: clamp(.5rem, 1vw, 1rem);
+	font-size: clamp(.5rem, 10cqw, 1rem);
+	grid-area: description;
+}
+.s-indicator__desc::before {
+	display: block;
+	content: "Step " counter(indicator_index);
+	color: var(--cool-gray);
+	font-size: .75em;
 }
 
 .form-content {
@@ -267,16 +302,17 @@ input[type="radio"]:not(:checked) + .toggle-label {
 }
 
 .steps-wrapper {
+	grid-area: steps;
+	align-self: start;
 	background-color: var(--white);
-	max-width: 95vw;
 	border-radius: 0.5rem;
 	padding-block: 1.5rem;
 	padding-inline: 0.75rem;
 	box-shadow: 1px 4px 8px 0px var(--light-gray);
 	position: relative;
-	overflow: hidden;
+	overflow: hidden scroll;
+	max-height: 70vh;
 }
-
 .step-out {
 	position: absolute;
 	opacity: 0;
@@ -287,7 +323,7 @@ input[type="radio"]:not(:checked) + .toggle-label {
 	--gap: 0.75rem;
 	margin: 0;
 	border: none;
-	padding-inline: 0.25rem;
+	padding-inline: 0;
 	/* transform: translateX(calc(var(--i) * 100%));*/
 }
 
@@ -304,7 +340,7 @@ body {
 input[type="text"] {
   font-size: 1.25em;
   min-width: 100%;
-  min-height: 2.5rem;
+  min-height: 3rem;
   padding-inline: 0.5rem;
   border: solid 1px var(--light-gray);
   border-radius: 0.25rem;
@@ -330,7 +366,7 @@ input[type="text"] {
 
 .plan-card {
   background-color: var(--white);
-  border: solid 1px var(--light-gray);
+  border: solid 1px var(--plan-border, var(--light-gray));
   border-radius: 0.5rem;
   padding-block: 0.5rem;
   padding-inline: 1rem;
@@ -339,11 +375,12 @@ input[type="text"] {
                         "img  cost"
                         ".  discount";
 
-  gap: .25rem;
+  gap: .25rem 1rem;
   text-align: start;
   grid-template-columns: 1fr 5fr;
 
 }
+
 
 .plan__img {
     grid-area: img;
@@ -351,10 +388,13 @@ input[type="text"] {
 
 .plan__cost {
     grid-area: cost;
+    color: var(--cool-gray);
+    font-family: "Ubuntu-Medium";
 }
 
 .plan__discount {
     grid-area: discount;
+    color: var(--marine-blue);
 }
 
 .btn-primary {
@@ -398,6 +438,7 @@ input[type="text"] {
 }
 
 .nav-btns {
+  grid-area: nav;
   background-color: var(--white);
   padding-inline: 1rem;
   padding-block: 1.25rem;
@@ -441,15 +482,73 @@ footer {
   padding-block: 0 1rem;
 }
 
-@media screen and (min-width: 375px) {
-  .card {
-    max-width: 256px;
-  }
+@media screen and (min-width: 400px) {
+    :root {
+        --f-grid-areas: "indicators . steps ."
+                        "indicators . steps ."
+                        "indicators . nav .";
+
+        --indicator-bg: url(assets/images/bg-sidebar-desktop.svg);
+    }
+
+    .form {
+        grid-template-columns: minmax(6rem, 1.5fr) minmax(0, .5fr) minmax(60vw, 5fr) minmax(0, .5fr);
+        grid-template-rows: repeat(2, 1fr) .25fr;
+        background-color: var(--white);
+        padding-inline: .5rem;
+        padding-block: 1rem;
+    }
+
+    input[type="text"] {
+        min-height: 4rem;
+        padding-inline-end: 0;
+    }
+
+    .input-label {
+        --gap: 1rem;
+    }
+
+    .steps-wrapper {
+        padding-inline-start: 0;
+        box-shadow: none;
+        max-height: 80vh;
+    }
+
+    .indicators.indicators {
+        margin-block: 0;
+        flex-direction: column;
+        justify-content: flex-start;
+        gap: 2rem;
+        padding-inline: .5rem;
+        border-radius: .5rem;
+    }
+    .s-indicator__desc:only-child {
+        display: block;
+    }
+
+    .plan-card {
+        grid-template-areas: "img"
+                             "title"
+                             "cost"
+                             "discount";
+        grid-template-rows: 2fr repeat(3, .25fr);
+        grid-template-columns: 1fr;
+        padding-block: 2rem 1rem;
+        line-height: 1.6;
+    }
+
+    .responsive-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(10rem, 1fr));
+        grid-auto-rows: minmax(15rem, auto);
+        gap: 1rem;
+        padding-inline-end: 1rem;
+    }
 }
 
 
 @media(prefers-reduced-motion: no-preference) {
-    .step-indicator::before,
+    .s-indicator::before,
     .addon-check,
     .addon,
     .nav-btn,

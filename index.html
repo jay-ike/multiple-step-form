@@ -19,259 +19,253 @@
     <main>
       <form class="form" style="--current: 0">
         <ul class="indicators">
-          <li class="step-indicator step-active" style="--i: 0">
-            <p>
-              Step 1 <br />
+          <li class="s-indicator step-active" style="--i: 0">
+            <p class="s-indicator__desc">
               Your info
             </p>
           </li>
-          <li class="step-indicator" style="--i: 1">
-            <p>
-              Step 2 <br />
+          <li class="s-indicator" style="--i: 1">
+            <p class="s-indicator__desc">
               Select plan
             </p>
           </li>
-          <li class="step-indicator" style="--i: 2">
-            <p>
-              Step 3 <br />
+          <li class="s-indicator" style="--i: 2">
+            <p class="s-indicator__desc">
               Add-ons
             </p>
           </li>
-          <li class="step-indicator" style="--i: 3">
-            <p>
-              Step 4 <br />
+          <li class="s-indicator" style="--i: 3">
+            <p class="s-indicator__desc">
               Summary
             </p>
           </li>
         </ul>
-        <main class="form-content">
-          <div class="steps-wrapper">
+        <div class="steps-wrapper">
             <fieldset class="step column" style="--i: 0">
-              <legend>
-                <div class="column">
-                  <h2 class="step__title">Personal info</h2>
-                  <p>
-                    Please provide your name, email address, and phone number.
-                  </p>
-                </div>
-              </legend>
-              <label class="block input-label" for="name">
-                Name
-                <input
-                  id="name"
-                  name="fullName"
-                  type="text"
-                  placeholder="e.g. Stephen King"
-                />
-              </label>
-              <label class="block input-label" for="email">
-                Email Address
-                <input
-                  id="email"
-                  name="email"
-                  type="text"
-                  placeholder="e.g. stephenking@lorem.com"
-                />
-              </label>
-              <label class="block input-label" for="phone">
-                Phone Number
-                <input
-                  type="text"
-                  id="phone"
-                  placeholder="e.g. +1 234 567 890"
-                  name="phone"
-                />
-              </label>
+                <legend>
+                    <div class="column">
+                        <h2 class="step__title">Personal info</h2>
+                        <p>
+                        Please provide your name, email address, and phone number.
+                        </p>
+                    </div>
+                </legend>
+                <label class="block input-label" for="name">
+                    Name
+                    <input
+                    id="name"
+                    name="fullName"
+                    type="text"
+                    placeholder="e.g. Stephen King"
+                    />
+                </label>
+                <label class="block input-label" for="email">
+                    Email Address
+                    <input
+                    id="email"
+                    name="email"
+                    type="text"
+                    placeholder="e.g. stephenking@lorem.com"
+                    />
+                </label>
+                <label class="block input-label" for="phone">
+                    Phone Number
+                    <input
+                    type="text"
+                    id="phone"
+                    placeholder="e.g. +1 234 567 890"
+                    name="phone"
+                    />
+                </label>
             </fieldset>
             <fieldset class="step  column" style="--i: 1">
-              <legend>
-                <div class="column">
-                  <h2 class="step__title">Select your plan</h2>
-                  <p>You have the option of monthly or yearly billing.</p>
+                <legend>
+                    <div class="column">
+                        <h2 class="step__title">Select your plan</h2>
+                        <p>You have the option of monthly or yearly billing.</p>
+                    </div>
+                </legend>
+                <div class="responsive-grid">
+                    <button class="plan-card"  name= "arcade_plan" type="button">
+                        <img
+                        class="plan__img"
+                        src="assets/images/icon-arcade.svg"
+                        width="48"
+                        height="48"
+                        alt="Arcade plan illustration"
+                        />
+                        <h5 class="text-medium plan__title">Arcade</h5>
+                        <p class="plan__cost">$9/mo</p>
+                        <p class="plan__discount">2 months free</p>
+                    </button>
+                    <button class="plan-card" name="advanced_plan" type="button">
+                        <img
+                        class="plan__img"
+                        src="assets/images/icon-advanced.svg"
+                        width="48"
+                        height="48"
+                        alt="Advanced plan illustration"
+                        />
+                        <h5 class="text-medium plan__title">Advanced</h5>
+                        <p class="plan__cost">$12/mo</p>
+                        <p class="plan__discount">2 months free</p>
+                    </button>
+                    <button class="plan-card" name="pro_plan" type="button">
+                        <img
+                        class="plan__img"
+                        src="assets/images/icon-pro.svg"
+                        width="48"
+                        height="48"
+                        alt="Professional plan illustration"
+                        />
+                        <h5 class="text-medium plan__title">Pro</h5>
+                        <p class="plan__cost">$15/mo</p>
+                        <p class="plan__discount">2 months free</p>
+                    </button>
                 </div>
-              </legend>
-              <div class="responsive-grid">
-                <button class="plan-card" type="button">
-                  <img
-                    class="plan__img"
-src="assets/images/icon-arcade.svg"
-                    width="48"
-                    height="48"
-                    alt="Arcade plan illustration"
-                  />
-                  <h5 class="text-medium plan__title">Arcade</h5>
-                  <p class="plan__cost">$9/mo</p>
-                  <p class="plan__discount">2 months free</p>
-                </button>
-                <button class="plan-card" type="button">
-                  <img
-                    class="plan__img"
-src="assets/images/icon-advanced.svg"
-                    width="48"
-                    height="48"
-                    alt="Advanced plan illustration"
-                  />
-                  <h5 class="text-medium plan__title">Advanced</h5>
-                  <p class="plan__cost">$12/mo</p>
-                  <p class="plan__discount">2 months free</p>
-                </button>
-                <button class="plan-card" type="button">
-                  <img
-                    class="plan__img"
-src="assets/images/icon-pro.svg"
-                    width="48"
-                    height="48"
-                    alt="Professional plan illustration"
-                  />
-                  <h5 class="text-medium plan__title">Pro</h5>
-                  <p class="plan__cost">$15/mo</p>
-                  <p class="plan__discount">2 months free</p>
-                </button>
-              </div>
-              <div class="toggle-wrapper text-medium">
-                <input
-                  class="visually-hidden"
-                  id="m-billing"
-                  type="radio"
-                  name="billingType"
-                  value="month"
-                />
-                <label class="toggle-label" for="m-billing">Monthly</label>
-                <input
-                  class="visually-hidden"
-                  id="y-billing"
-                  type="radio"
-                  name="billingType"
-                  value="year"
-                />
-                <label class="toggle-label" for="y-billing">Yearly</label>
-                <span class="toggle"></span>
-              </div>
+                <div class="toggle-wrapper text-medium">
+                    <input
+                    class="visually-hidden"
+                    id="m-billing"
+                    type="radio"
+                    name="billingType"
+                    value="month"
+                    />
+                    <label class="toggle-label" for="m-billing">Monthly</label>
+                    <input
+                    class="visually-hidden"
+                    id="y-billing"
+                    type="radio"
+                    name="billingType"
+                    value="year"
+                    />
+                    <label class="toggle-label" for="y-billing">Yearly</label>
+                    <span class="toggle"></span>
+                </div>
             </fieldset>
             <fieldset class="step " style="--i: 2">
-              <legend>
+                <legend>
+                    <div class="column">
+                        <h2 class="step__title">Pick add-ons</h2>
+                        <p>Add-ons help enhance your gaming experience</p>
+                    </div>
+                </legend>
                 <div class="column">
-                  <h2 class="step__title">Pick add-ons</h2>
-                  <p>Add-ons help enhance your gaming experience</p>
+                    <div class="addon">
+                        <div class="i-container">
+                            <input
+                            class="i-check"
+                            id="o-service"
+                            type="checkbox"
+                            name="onlineServiceEnabled"
+                            />
+                            <svg
+                                class="addon-check"
+                                xmlns="http://www.w3.org/2000/svg"
+                                width="12"
+                                height="9"
+                                viewBox="0 0 12 9"
+                                >
+                                <path
+                                fill="none"
+                                pathLength="1"
+                                stroke-width="2"
+                                d="m1 4 3.433 3.433L10.866 1"
+                                />
+                            </svg>
+                        </div>
+                        <label class="addon-plan" for="o-service">
+                            <h5 class="addon__title text-medium">Online service</h5>
+                            <p>Access to multiplayer games</p>
+                        </label>
+                        <span class="addon__cost">+$1/mo</span>
+                    </div>
+                    <div class="addon">
+                        <div class="i-container">
+                            <input
+                            class="i-check"
+                            id="l-storage"
+                            type="checkbox"
+                            name="storageEnabled"
+                            />
+                            <svg
+                                class="addon-check"
+                                xmlns="http://www.w3.org/2000/svg"
+                                width="12"
+                                height="9"
+                                viewBox="0 0 12 9"
+                                >
+                                <path
+                                fill="none"
+                                stroke-width="2"
+                                pathLength="1"
+                                d="m1 4 3.433 3.433L10.866 1"
+                                />
+                            </svg>
+                        </div>
+                        <label class="addon-plan" for="l-storage">
+                            <h5 class="addon__title text-medium">Larger storage</h5>
+                            <p>Extra 1TB of cloud save</p>
+                        </label>
+                        <span class="addon__cost">+$2/mo</span>
+                    </div>
+                    <div class="addon">
+                        <div class="i-container">
+                            <input
+                            class="i-check"
+                            id="c-theme"
+                            type="checkbox"
+                            name="customizationEnabled"
+                            />
+                            <svg
+                                class="addon-check"
+                                xmlns="http://www.w3.org/2000/svg"
+                                width="12"
+                                height="9"
+                                viewBox="0 0 12 9"
+                                >
+                                <path
+                                fill="none"
+                                pathLength="1"
+                                stroke-width="2"
+                                d="m1 4 3.433 3.433L10.866 1"
+                                />
+                            </svg>
+                        </div>
+                        <label class="addon-plan" for="c-theme">
+                            <h5 class="addon__title text-medium">
+                                Customizable profile
+                            </h5>
+                            <p>custom theme on your profile</p>
+                        </label>
+                        <span class="addon__cost">+$2/mo</span>
+                    </div>
                 </div>
-              </legend>
-              <div class="column">
-                <div class="addon">
-                  <div class="i-container">
-                    <input
-                      class="i-check"
-                      id="o-service"
-                      type="checkbox"
-                      name="onlineServiceEnabled"
-                    />
-                    <svg
-                      class="addon-check"
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="12"
-                      height="9"
-                      viewBox="0 0 12 9"
-                    >
-                      <path
-                        fill="none"
-                        pathLength="1"
-                        stroke-width="2"
-                        d="m1 4 3.433 3.433L10.866 1"
-                      />
-                    </svg>
-                  </div>
-                  <label class="addon-plan" for="o-service">
-                    <h5 class="addon__title text-medium">Online service</h5>
-                    <p>Access to multiplayer games</p>
-                  </label>
-                  <span class="addon__cost">+$1/mo</span>
-                </div>
-                <div class="addon">
-                  <div class="i-container">
-                    <input
-                      class="i-check"
-                      id="l-storage"
-                      type="checkbox"
-                      name="storageEnabled"
-                    />
-                    <svg
-                      class="addon-check"
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="12"
-                      height="9"
-                      viewBox="0 0 12 9"
-                    >
-                      <path
-                        fill="none"
-                        stroke-width="2"
-                        pathLength="1"
-                        d="m1 4 3.433 3.433L10.866 1"
-                      />
-                    </svg>
-                  </div>
-                  <label class="addon-plan" for="l-storage">
-                    <h5 class="addon__title text-medium">Larger storage</h5>
-                    <p>Extra 1TB of cloud save</p>
-                  </label>
-                  <span class="addon__cost">+$2/mo</span>
-                </div>
-                <div class="addon">
-                  <div class="i-container">
-                    <input
-                      class="i-check"
-                      id="c-theme"
-                      type="checkbox"
-                      name="customizationEnabled"
-                    />
-                    <svg
-                      class="addon-check"
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="12"
-                      height="9"
-                      viewBox="0 0 12 9"
-                    >
-                      <path
-                        fill="none"
-                        pathLength="1"
-                        stroke-width="2"
-                        d="m1 4 3.433 3.433L10.866 1"
-                      />
-                    </svg>
-                  </div>
-                  <label class="addon-plan" for="c-theme">
-                    <h5 class="addon__title text-medium">
-                      Customizable profile
-                    </h5>
-                    <p>custom theme on your profile</p>
-                  </label>
-                  <span class="addon__cost">+$2/mo</span>
-                </div>
-              </div>
             </fieldset>
             <div class="step " style="--i: 3">
-              <div>
-                <h2 class="step__title">Finishing up</h2>
-                <p>Double-check everything looks OK before confirming.</p>
-              </div>
-              <table>
-                <thead>
-                  <tr></tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td></td>
-                    <td class="amt-cell"></td>
-                  </tr>
-                </tbody>
-              </table>
+                <div>
+                    <h2 class="step__title">Finishing up</h2>
+                    <p>Double-check everything looks OK before confirming.</p>
+                </div>
+                <table>
+                    <thead>
+                        <tr></tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td></td>
+                            <td class="amt-cell"></td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
-          </div>
-          <div class="nav-btns">
+        </div>
+        <div class="nav-btns">
             <button class="nav-btn text-medium hidden" type="button">Go Back</button
-              ><button class="nav-btn btn-primary text-medium" type="button">
+            ><button class="nav-btn btn-primary text-medium" type="button">
                 Next Step
-            </button>
-          </div>
-        </main>
+                </button>
+        </div>
       </form>
     </main>
     <!-- Thank you!
