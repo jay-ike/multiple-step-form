@@ -78,7 +78,7 @@
                     />
                 </label>
             </fieldset>
-            <fieldset class="step  column" style="--i: 1">
+            <fieldset class="step step-out column" style="--i: 1">
                 <legend>
                     <div class="column">
                         <h2 class="step__title">Select your plan</h2>
@@ -86,7 +86,7 @@
                     </div>
                 </legend>
                 <div class="responsive-grid">
-                    <button class="plan-card"  name= "arcade_plan" type="button">
+                    <div class="plan-card" >
                         <img
                         class="plan__img"
                         src="assets/images/icon-arcade.svg"
@@ -94,11 +94,12 @@
                         height="48"
                         alt="Arcade plan illustration"
                         />
-                        <h5 class="text-medium plan__title">Arcade</h5>
+                        <input class="visually-hidden" type="radio" id="arcade" name="plan" value="arcade_plan" />
+                        <label class="text-medium plan__title">Arcade</label>
                         <p class="plan__cost">$9/mo</p>
                         <p class="plan__discount">2 months free</p>
-                    </button>
-                    <button class="plan-card" name="advanced_plan" type="button">
+                    </div>
+                    <div class="plan-card" name="advanced_plan" type="button">
                         <img
                         class="plan__img"
                         src="assets/images/icon-advanced.svg"
@@ -106,11 +107,12 @@
                         height="48"
                         alt="Advanced plan illustration"
                         />
-                        <h5 class="text-medium plan__title">Advanced</h5>
+                        <input class="visually-hidden" type="radio" id="advanced" name="plan" value="advanced_plan" />
+                        <label class="text-medium plan__title" for="advanced">Advanced</label>
                         <p class="plan__cost">$12/mo</p>
                         <p class="plan__discount">2 months free</p>
-                    </button>
-                    <button class="plan-card" name="pro_plan" type="button">
+                    </div>
+                    <div class="plan-card" name="pro_plan" type="button">
                         <img
                         class="plan__img"
                         src="assets/images/icon-pro.svg"
@@ -118,10 +120,11 @@
                         height="48"
                         alt="Professional plan illustration"
                         />
-                        <h5 class="text-medium plan__title">Pro</h5>
+                        <input class="visually-hidden" type="radio" id="pro" name="plan" value="pro_plan" />
+                        <label class="text-medium plan__title">Pro</label>
                         <p class="plan__cost">$15/mo</p>
                         <p class="plan__discount">2 months free</p>
-                    </button>
+                    </div>
                 </div>
                 <div class="toggle-wrapper text-medium">
                     <input
@@ -143,7 +146,7 @@
                     <span class="toggle"></span>
                 </div>
             </fieldset>
-            <fieldset class="step " style="--i: 2">
+            <fieldset class="step step-out" style="--i: 2">
                 <legend>
                     <div class="column">
                         <h2 class="step__title">Pick add-ons</h2>
@@ -242,7 +245,7 @@
                     </div>
                 </div>
             </fieldset>
-            <div class="step " style="--i: 3">
+            <div class="step step-out" style="--i: 3">
                 <div>
                     <h2 class="step__title">Finishing up</h2>
                     <p>Double-check everything looks OK before confirming.</p>
