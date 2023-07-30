@@ -16,7 +16,7 @@
     <title>Frontend Mentor | Multi-step form</title>
   </head>
   <body>
-    <main>
+    <main class="main-content">
       <form class="form" style="--current: 0">
         <ul class="indicators">
           <li class="s-indicator step-active" style="--i: 0">
@@ -95,7 +95,7 @@
                         alt="Arcade plan illustration"
                         />
                         <input class="visually-hidden" type="radio" id="arcade" name="plan" value="arcade_plan" />
-                        <label class="text-medium plan__title">Arcade</label>
+                        <label class="text-medium plan__title extend-click" for="arcade">Arcade</label>
                         <p class="plan__cost">$9/mo</p>
                         <p class="plan__discount">2 months free</p>
                     </div>
@@ -108,7 +108,7 @@
                         alt="Advanced plan illustration"
                         />
                         <input class="visually-hidden" type="radio" id="advanced" name="plan" value="advanced_plan" />
-                        <label class="text-medium plan__title" for="advanced">Advanced</label>
+                        <label class="text-medium plan__title extend-click" for="advanced">Advanced</label>
                         <p class="plan__cost">$12/mo</p>
                         <p class="plan__discount">2 months free</p>
                     </div>
@@ -121,7 +121,7 @@
                         alt="Professional plan illustration"
                         />
                         <input class="visually-hidden" type="radio" id="pro" name="plan" value="pro_plan" />
-                        <label class="text-medium plan__title">Pro</label>
+                        <label class="text-medium plan__title extend-click" for="pro">Pro</label>
                         <p class="plan__cost">$15/mo</p>
                         <p class="plan__discount">2 months free</p>
                     </div>
@@ -177,7 +177,7 @@
                                 />
                             </svg>
                         </div>
-                        <label class="addon-plan" for="o-service">
+                        <label class="addon-plan extend-click" for="o-service">
                             <h5 class="addon__title text-medium">Online service</h5>
                             <p>Access to multiplayer games</p>
                         </label>
@@ -206,7 +206,7 @@
                                 />
                             </svg>
                         </div>
-                        <label class="addon-plan" for="l-storage">
+                        <label class="addon-plan extend-click" for="l-storage">
                             <h5 class="addon__title text-medium">Larger storage</h5>
                             <p>Extra 1TB of cloud save</p>
                         </label>
@@ -235,7 +235,7 @@
                                 />
                             </svg>
                         </div>
-                        <label class="addon-plan" for="c-theme">
+                        <label class="addon-plan extend-click" for="c-theme">
                             <h5 class="addon__title text-medium">
                                 Customizable profile
                             </h5>
@@ -245,29 +245,43 @@
                     </div>
                 </div>
             </fieldset>
-            <div class="step step-out" style="--i: 3">
+            <div class="column step step-out" style="--i: 3">
                 <div>
                     <h2 class="step__title">Finishing up</h2>
                     <p>Double-check everything looks OK before confirming.</p>
                 </div>
-                <table>
+                <table class="t-checkout">
                     <thead>
-                        <tr></tr>
+                        <tr >
+                            <td>
+                                Arcade(Monthly)
+                                <button type="button" class="p-swap">
+                                    change
+                                </button>
+                            </td>
+                            <td >$90/yr</td>
+                        </tr>
                     </thead>
                     <tbody>
                         <tr>
-                            <td></td>
-                            <td class="amt-cell"></td>
+                            <td>Online service</td>
+                            <td >+$10/yr</td>
                         </tr>
                     </tbody>
                 </table>
+                <div class="t-recap">
+                    <p>Total(per year)</p>
+                    <p class="t-recap__amt">$120/yr</p>
+                </div>
             </div>
         </div>
         <div class="nav-btns">
-            <button class="nav-btn text-medium hidden" type="button">Go Back</button
-            ><button class="nav-btn btn-primary text-medium" type="button">
+            <button class="nav-btn text-medium hidden" type="button">
+                Go Back
+            </button>
+            <button class="nav-btn btn-primary text-medium" type="button">
                 Next Step
-                </button>
+            </button>
         </div>
       </form>
     </main>
