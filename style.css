@@ -322,14 +322,14 @@ input[type="radio"]:not(:checked) + .toggle-label {
 	padding-inline: 0.75rem;
 	box-shadow: 1px 4px 8px 0px var(--light-gray);
 	position: relative;
-	overflow: hidden scroll;
 	max-height: 70vh;
+    overflow: hidden;
 }
-/*.step-out {
+.step-out {
 	position: absolute;
 	opacity: 0;
 	visibility: hidden;
-}*/
+}
 
 .step {
 	--gap: 0.75rem;
@@ -339,7 +339,7 @@ input[type="radio"]:not(:checked) + .toggle-label {
     margin-inline: 0;
     margin-block: 0;
     min-inline-size: auto;
-	/*transform: translateX(calc(calc(var(--current) - var(--i)) * 100%));*/
+	transform: translateX(calc(calc(var(--i)  -  var(--current)) * 100%));
 }
 
 .column > * + * {
@@ -354,9 +354,9 @@ body {
 
 input[type="text"] {
   font-size: 1.25em;
-  min-width: 100%;
+  max-width: 100%;
   min-height: 3rem;
-  padding-inline: 0;
+  padding-inline: .5rem;
   border: solid 1px var(--light-gray);
   border-radius: 0.25rem;
 }
@@ -479,6 +479,7 @@ input[type="radio"]:is(:checked) + .plan__title {
 }
 
 .nav-btn.nav-btn {
+  font-family: "Ubuntu Medium";
   background-color: var(--active-bg, var(--white));
   color: var(--active-clr, var(--cool-gray));
   letter-spacing: 0.5px;
@@ -601,7 +602,7 @@ footer {
 
     input[type="text"] {
         min-height: 4rem;
-        padding-inline-end: 0;
+        min-width: 100%;
     }
     .s-indicator {
         display: inline-grid;
