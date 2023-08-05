@@ -52,31 +52,40 @@
                 </legend>
                 <label class="block input-label" for="name">
                     Name
-                    <input
-                    id="name"
-                    name="fullName"
-                    type="text"
-                    placeholder="e.g. Stephen King"
-                    />
                 </label>
-                <label class="block input-label" for="email">
-                    Email Address
+                <input
+                id="name"
+                name="fullName"
+                type="text" class="text-input"
+                placeholder="e.g. Stephen King"
+                />
+                <div class="column relative">
+                    <label class="block input-label" for="email">
+                        Email Address
+                    </label>
                     <input
                     id="email"
                     name="email"
-                    type="text"
+                    type="email" class="text-input"
                     placeholder="e.g. stephenking@lorem.com"
+                    pattern="^\w+@\w+\.\w+$"
+                    required
                     />
-                </label>
-                <label class="block input-label" for="phone">
-                    Phone Number
+                    <span class="error">Please enter a valid email</span>
+                </div>
+                <div class="column relative">
+                    <label class="block input-label" for="phone">
+                        Phone Number
+                    </label>
                     <input
-                    type="text"
+                    type="tel" class="text-input"
                     id="phone"
                     placeholder="e.g. +1 234 567 890"
                     name="phone"
+                    required
                     />
-                </label>
+                    <span class="error">This field is required</span>
+                </div>
             </fieldset>
             <fieldset class="step step-out column" style="--i: 1">
                 <legend>
@@ -86,7 +95,7 @@
                     </div>
                 </legend>
                 <div class="responsive-grid">
-                    <div class="plan-card" >
+                    <div class="plan-card">
                         <img
                         class="plan__img"
                         src="assets/images/icon-arcade.svg"
@@ -94,12 +103,12 @@
                         height="48"
                         alt="Arcade plan illustration"
                         />
-                        <input class="visually-hidden" type="radio" id="arcade" name="plan" value="arcade_plan" />
+                        <input class="visually-hidden" type="radio" id="arcade" name="plan" value="arcade_plan" checked/>
                         <label class="text-medium plan__title extend-click" for="arcade">Arcade</label>
                         <p class="plan__cost">$9/mo</p>
                         <p class="plan__discount">2 months free</p>
                     </div>
-                    <div class="plan-card" name="advanced_plan" type="button">
+                    <div class="plan-card">
                         <img
                         class="plan__img"
                         src="assets/images/icon-advanced.svg"
@@ -112,7 +121,7 @@
                         <p class="plan__cost">$12/mo</p>
                         <p class="plan__discount">2 months free</p>
                     </div>
-                    <div class="plan-card" name="pro_plan" type="button">
+                    <div class="plan-card">
                         <img
                         class="plan__img"
                         src="assets/images/icon-pro.svg"
@@ -133,8 +142,9 @@
                     type="radio"
                     name="billingType"
                     value="month"
+                    checked
                     />
-                    <label class="toggle-label" for="m-billing">Monthly</label>
+                    <label tabindex="0" class="toggle-label" for="m-billing">Monthly</label>
                     <input
                     class="visually-hidden"
                     id="y-billing"
@@ -142,11 +152,11 @@
                     name="billingType"
                     value="year"
                     />
-                    <label class="toggle-label" for="y-billing">Yearly</label>
+                    <label tabindex="0" class="toggle-label" for="y-billing">Yearly</label>
                     <span class="toggle"></span>
                 </div>
             </fieldset>
-            <fieldset class="step step-out" style="--i: 2">
+            <fieldset class="step column step-out" style="--i: 2">
                 <legend>
                     <div class="column">
                         <h2 class="step__title">Pick add-ons</h2>
@@ -177,10 +187,10 @@
                                 />
                             </svg>
                         </div>
-                        <label class="addon-plan extend-click" for="o-service">
-                            <h5 class="addon__title text-medium">Online service</h5>
-                            <p>Access to multiplayer games</p>
+                        <label tabindex="0" class="addon-plan extend-click" for="o-service">
+                            Online service
                         </label>
+                        <p class="addon__desc">Access to multiplayer games</p>
                         <span class="addon__cost">+$1/mo</span>
                     </div>
                     <div class="addon">
@@ -206,10 +216,10 @@
                                 />
                             </svg>
                         </div>
-                        <label class="addon-plan extend-click" for="l-storage">
-                            <h5 class="addon__title text-medium">Larger storage</h5>
-                            <p>Extra 1TB of cloud save</p>
+                        <label tabindex="0" class="addon-plan extend-click" for="l-storage">
+                            Larger storage
                         </label>
+                        <p class="addon__desc">Extra 1TB of cloud save</p>
                         <span class="addon__cost">+$2/mo</span>
                     </div>
                     <div class="addon">
@@ -235,12 +245,10 @@
                                 />
                             </svg>
                         </div>
-                        <label class="addon-plan extend-click" for="c-theme">
-                            <h5 class="addon__title text-medium">
-                                Customizable profile
-                            </h5>
-                            <p>custom theme on your profile</p>
+                        <label tabindex="0" class="addon-plan extend-click" for="c-theme">
+                            Customizable profile
                         </label>
+                        <p class="addon__desc">custom theme on your profile</p>
                         <span class="addon__cost">+$2/mo</span>
                     </div>
                 </div>

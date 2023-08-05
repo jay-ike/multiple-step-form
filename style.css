@@ -64,6 +64,7 @@ button[class] {
   --light-gray: hsl(229, 24%, 87%);
   --magnolia-clr: hsl(217, 100%, 97%);
   --alabaster-clr: hsl(231, 100%, 99%);
+  --strawberry-red: hsl(354, 84%, 57%);
   --white: hsl(0, 0%, 100%);
   --elastic-timing: cubic-bezier(.25, .1, .3, 1.5);
   --f-grid-areas: "indicators   indicators  indicators"
@@ -83,6 +84,10 @@ button[class] {
   display: block;
 }
 
+.relative {
+    position: relative;
+}
+
 .input-label {
   font-family: "Ubuntu";
   font-size: 0.85em;
@@ -95,6 +100,9 @@ legend {
 }
 
 .form {
+    --plan: var(--monthly-plan);
+    --monthly-plan: var(--plan,);
+    --yearly-plan: var(--plan,);
 	--neg-margin: -3rem;
 	display: grid;
     grid-template: var(--f-grid-temp);
@@ -127,16 +135,17 @@ legend {
 
 .s-indicator::before {
 	content: counters(indicator_index, ".");
-	width: 2rem;
-	aspect-ratio: 1;
 	border: solid 2px var(--bd-clr, var(--white));
-	display: inline-block;
+	display: inline-grid;
 	border-radius: 50%;
-	padding: 0.3em;
-	text-align: center;
+    place-content: center;
+    line-height: 1;
 	font-size: 0.85em;
+    font-size: clamp(.5em, 7cqw, .85em);
 	background-color: var(--bg-clr, transparent);
 	color: var(--clr, white);
+    padding: var(--i-padding, .5em 1em);
+    aspect-ratio: 1;
 }
 
 .toggle-wrapper {
@@ -166,10 +175,6 @@ legend {
 }
 
 .toggle {
-  --plan: var(--default-plan);
-  --monthly-plan: var(--plan,);
-  --yearly-plan: var(--plan,);
-  --default-plan: var(--plan,);
   position: relative;
   width: 3rem;
   height: 1.5rem;
@@ -195,8 +200,7 @@ input[value="year"]:checked ~ .toggle {
   aspect-ratio: 1;
   border-radius: 50%;
   background-color: var(--white);
-  transform: var(--default-plan, scale(0.5) translateX(calc(50% + 1rem)))
-             var(--monthly-plan, none)
+  transform: var(--monthly-plan, none)
              var(--yearly-plan, translateX(calc(100% + 0.5rem)));
 }
 
@@ -209,6 +213,7 @@ input[type="radio"]:not(:checked) + .toggle-label {
   width: 1.25rem;
   height: 1.25rem;
   isolation: isolate;
+  grid-area: check;
 }
 
 .i-check {
@@ -243,12 +248,19 @@ input[type="radio"]:not(:checked) + .toggle-label {
 	padding-inline: 1rem;
 	padding-block: 0.5rem;
 	display: grid;
-	grid-template-areas: "check label cost";
-	gap: .5rem;
+	grid-template-areas: "check label cost"
+                         "check desc cost";
+	gap: .25rem 1rem;
 	grid-template-columns: .5fr 5fr 1fr;
 	align-items: center;
     position: relative;
     isolation: isolate;
+}
+
+.addon-plan:hover,
+.addon-plan:focus {
+    --plan-border: var(--purple-blue);
+    outline: none;
 }
 
 .i-container:has(.i-check:checked) + .addon-plan {
@@ -257,34 +269,36 @@ input[type="radio"]:not(:checked) + .toggle-label {
 }
 
 .addon-active {
-  border-color: var(--primary-clr);
-  background-color: var(--magnolia-clr);
+  --plan-border: var(--primary-clr);
+  --plan-bg: var(--magnolia-clr);
 }
 
 .addon-plan {
-  display: inline-flex;
-  flex-grow: 1;
-  justify-content: space-between;
-  flex-direction: column;
-  margin-inline-start: 1rem;
+    grid-area: label;
+    font-size: 1.05em;
+    font-size: clamp(.75em, 12cqw, 1.05em);
+}
+
+.addon__desc {
+    font-size: 0.8em;
+    color: var(--cool-gray);
+    letter-spacing: 0.1px;
+    grid-area: desc;
+    font-size: clamp(.5em, 10cqw, .8em);
 }
 
 .addon__title {
   font-weight: 500;
   letter-spacing: 0.01px;
   font-size: 1.05em;
-}
-
-.addon__title + * {
-  font-size: 0.8em;
-  color: var(--cool-gray);
-  letter-spacing: 0.1px;
+  grid-area: label;
 }
 
 .addon__cost {
   font-size: 0.75em;
   color: var(--primary-clr);
   text-align: end;
+  grid-area: cost;
 }
 
 .s-indicator__desc:only-child {
@@ -352,13 +366,33 @@ body {
   line-height: 1.5;
 }
 
-input[type="text"] {
+.text-input {
+  --gap: .25rem;
   font-size: 1.25em;
   max-width: 100%;
   min-height: 3rem;
   padding-inline: .5rem;
-  border: solid 1px var(--light-gray);
+  border: solid 1px var(--plan-border, var(--light-gray));
   border-radius: 0.25rem;
+}
+
+.input-error {
+    --plan-border: var(--strawberry-red);
+}
+
+.error {
+    display: none;
+    color: var(--strawberry-red);
+    position: absolute;
+    inset-inline-end: 0;
+    inset-block-start: -.5rem;
+    font-weight: 700;
+    font-size: .75em;
+}
+
+.input-error + .error {
+    display: inline-block;
+    position: relative;
 }
 
 .step__title {
@@ -366,6 +400,7 @@ input[type="text"] {
   color: var(--marine-blue);
   line-height: 1.3;
   letter-spacing: -0.2px;
+  font-size: clamp(1rem, 6vw, 2rem);
 }
 
 .step__title + p {
@@ -398,19 +433,23 @@ input[type="text"] {
     grid-area: cost;
     color: var(--cool-gray);
     font-family: "Ubuntu-Medium";
+    font-size: .85em;
 }
 
 .plan__discount {
     grid-area: discount;
     color: var(--marine-blue);
+    font-size: .75em;
+    display: var(--monthly-plan, none)
+             var(--yearly-plan, block);
 }
 
-.btn-primary {
+ .btn-primary.btn-primary.btn-primary {
   --active-clr: var(--white);
   --active-bg: var(--marine-blue);
 }
 
-.btn-confirm {
+.btn-confirm.btn-confirm.btn-confirm {
   --active-clr: var(--white);
   --active-bg: var(--purple-blue);
 }
@@ -419,9 +458,17 @@ input[type="text"] {
     visibility: hidden;
 }
 
-input[type="radio"]:is(:checked) + .plan__title {
+input[type="radio"]:checked + .plan__title {
     --plan-bg: var(--magnolia-clr);
-    --plan-border: var(--pastel-blue);
+    --plan-border: var(--purple-blue);
+}
+
+.plan-card:focus,
+.plan-card:hover,
+.text-input:focus,
+.text-input:hover {
+    --plan-border: var(--purple-blue);
+    outline: none;
 }
 
 .plan__title {
@@ -487,6 +534,11 @@ input[type="radio"]:is(:checked) + .plan__title {
   padding-block: 0.75rem;
   border-radius: 0.5rem;
   min-width: 5rem;
+}
+
+ .nav-btn:hover,
+ .nav-btn:focus {
+    --active-clr: var(--marine-blue);
 }
 
 .attribution {
@@ -592,6 +644,7 @@ footer {
                         "indicators nav nav";
         --f-grid-temp: repeat(2, 2fr) .4fr / repeat(3, 1fr);
         --indicator-bg: url(assets/images/bg-sidebar-desktop.svg);
+        --i-padding: 0;
     }
 
     .form {
@@ -600,7 +653,7 @@ footer {
         padding-block: 1rem;
     }
 
-    input[type="text"] {
+    .text-input {
         min-height: 4rem;
         min-width: 100%;
     }
@@ -608,12 +661,16 @@ footer {
         display: inline-grid;
         grid-template-areas: ". description";
         gap: 1rem;
-        grid-template-columns: minmax(2rem, .25fr) 5fr;
+        grid-template-columns: minmax(1.5em, .25fr) 5fr;
         container: indicator / inline-size;
     }
 
     .input-label {
         --gap: 1rem;
+    }
+
+    .input-error + .error {
+        position: absolute;
     }
 
     .steps-wrapper {
@@ -628,7 +685,7 @@ footer {
         justify-content: flex-start;
         gap: 2rem;
         border-radius: .5rem;
-        padding-inline: 1.5rem 1rem;
+        padding-inline: clamp(.5em, 2vw, 1.5em);
         padding-block: 3rem;
     }
     .s-indicator__desc:only-child {
@@ -651,7 +708,7 @@ footer {
 @media screen  and (min-width: 900px){
     .form {
         --col-width: 8rem;
-        max-width: 875px;
+        width: 875px;
         min-height: min-content;
         gap: 1rem 3rem;
         padding-inline-end: 3rem;
