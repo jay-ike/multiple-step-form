@@ -103,8 +103,20 @@
                         height="48"
                         alt="Arcade plan illustration"
                         />
-                        <input class="visually-hidden" type="radio" id="arcade" name="plan" value="arcade_plan" checked/>
-                        <label class="text-medium plan__title extend-click" for="arcade">Arcade</label>
+                        <input
+                        class="visually-hidden plan-option"
+                        type="radio"
+                        id="arcade"
+                        name="plan"
+                        value="arcade_plan"
+                        checked
+                        data-name="Arcade"
+                        data-cost="9"
+                        />
+                        <label
+                        class="text-medium plan__title extend-click"
+                        for="arcade"
+                        >Arcade</label>
                         <p class="plan__cost">$9/mo</p>
                         <p class="plan__discount">2 months free</p>
                     </div>
@@ -116,7 +128,15 @@
                         height="48"
                         alt="Advanced plan illustration"
                         />
-                        <input class="visually-hidden" type="radio" id="advanced" name="plan" value="advanced_plan" />
+                        <input
+                        class="visually-hidden plan-option"
+                        type="radio"
+                        id="advanced"
+                        name="plan"
+                        value="advanced_plan"
+                        data-name="Advanced"
+                        data-cost="12"
+                        />
                         <label class="text-medium plan__title extend-click" for="advanced">Advanced</label>
                         <p class="plan__cost">$12/mo</p>
                         <p class="plan__discount">2 months free</p>
@@ -129,7 +149,15 @@
                         height="48"
                         alt="Professional plan illustration"
                         />
-                        <input class="visually-hidden" type="radio" id="pro" name="plan" value="pro_plan" />
+                        <input
+                        class="visually-hidden plan-option"
+                        type="radio"
+                        id="pro"
+                        name="plan"
+                        value="pro_plan"
+                        data-name="Pro"
+                        data-cost="15"
+                        />
                         <label class="text-medium plan__title extend-click" for="pro">Pro</label>
                         <p class="plan__cost">$15/mo</p>
                         <p class="plan__discount">2 months free</p>
@@ -137,20 +165,26 @@
                 </div>
                 <div class="toggle-wrapper text-medium">
                     <input
-                    class="visually-hidden"
+                    class="visually-hidden b-option"
                     id="m-billing"
                     type="radio"
                     name="billingType"
                     value="month"
                     checked
+                    data-desc="monthly"
+                    data-short="mo"
+                    data-content="per month"
                     />
                     <label tabindex="0" class="toggle-label" for="m-billing">Monthly</label>
                     <input
-                    class="visually-hidden"
+                    class="visually-hidden b-option"
                     id="y-billing"
                     type="radio"
                     name="billingType"
                     value="year"
+                    data-desc="yearly"
+                    data-short="yr"
+                    data-content="per year"
                     />
                     <label tabindex="0" class="toggle-label" for="y-billing">Yearly</label>
                     <span class="toggle"></span>
@@ -171,6 +205,8 @@
                             id="o-service"
                             type="checkbox"
                             name="onlineServiceEnabled"
+                            data-cost="1"
+                            data-name="online service"
                             />
                             <svg
                                 class="addon-check"
@@ -200,6 +236,8 @@
                             id="l-storage"
                             type="checkbox"
                             name="storageEnabled"
+                            data-cost="2"
+                            data-name="larger storage"
                             />
                             <svg
                                 class="addon-check"
@@ -229,6 +267,8 @@
                             id="c-theme"
                             type="checkbox"
                             name="customizationEnabled"
+                            data-cost="2"
+                            data-name="customizable profile"
                             />
                             <svg
                                 class="addon-check"
@@ -258,27 +298,8 @@
                     <h2 class="step__title">Finishing up</h2>
                     <p>Double-check everything looks OK before confirming.</p>
                 </div>
-                <table class="t-checkout">
-                    <thead>
-                        <tr >
-                            <td>
-                                Arcade(Monthly)
-                                <button type="button" class="p-swap">
-                                    change
-                                </button>
-                            </td>
-                            <td >$90/yr</td>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>Online service</td>
-                            <td >+$10/yr</td>
-                        </tr>
-                    </tbody>
-                </table>
-                <div class="t-recap">
-                    <p>Total(per year)</p>
+                <div class="t-recap" data-desc="Total">
+                    <p>Total(per month)</p>
                     <p class="t-recap__amt">$120/yr</p>
                 </div>
             </div>

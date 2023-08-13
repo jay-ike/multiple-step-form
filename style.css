@@ -454,6 +454,16 @@ body {
   --active-bg: var(--purple-blue);
 }
 
+.btn-confirm.btn-confirm.btn-confirm:hover,
+.btn-confirm.btn-confirm.btn-confirm:focus {
+    --active-bg: hsl(243, 100%, 80%);
+}
+
+.btn-primary.btn-primary.btn-primary:hover,
+.btn-primary.btn-primary.btn-primary:focus {
+    --active-bg: hsl(213, 96%, 38%);
+}
+
 .hidden {
     visibility: hidden;
 }
@@ -534,6 +544,7 @@ input[type="radio"]:checked + .plan__title {
   padding-block: 0.75rem;
   border-radius: 0.5rem;
   min-width: 5rem;
+  text-transform: capitalize;
 }
 
  .nav-btn:hover,
@@ -571,16 +582,20 @@ footer {
     grid-auto-rows: minmax(var(--min-row,5rem), auto);
     gap: 1rem;
 }
-.p-swap {
+.p-swap.p-swap {
     text-transform: capitalize;
     display: block;
     color: var(--cool-gray);
     font-size: .9em;
     font-weight: 500;
-    text-decoration: underline from-font solid;
     letter-spacing: .8px;
     padding-inline: 0;
-    line-height: 1.8;
+    line-height: 1.1;
+    border-block-end: 2px solid currentColor;
+}
+.p-swap:hover,
+.p-swap:focus {
+    color: var(--purple-blue);
 }
 .t-checkout {
     --gap: 1.5rem;
@@ -615,11 +630,13 @@ footer {
 
 .t-checkout td {
     padding-block: var(--r-spacing);
+    text-transform: capitalize;
 }
 
 .t-checkout td:last-child{
     text-align: end;
     color: var(--marine-blue);
+    text-transform: none;
 }
 
 .t-recap {
@@ -729,6 +746,7 @@ footer {
     .addon-check,
     .addon,
     .nav-btn,
+    .p-swap,
     .attribution-lnk {
         transition: all .35s var(--elastic-timing);
     }
