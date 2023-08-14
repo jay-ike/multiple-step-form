@@ -259,7 +259,9 @@ stepHandler.parent?.addEventListener("click", function ({target}) {
     if (target.classList.contains("addon-plan")) {
         target.parentElement.classList.toggle("addon-active");
     }
-
+    if (target.classList.contains("toggle")) {
+        target.parentElement.querySelector(".b-option:not(:checked)").click();
+    }
 });
 
 stepHandler.parent?.addEventListener("input", function ({target}) {
