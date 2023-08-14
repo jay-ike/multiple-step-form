@@ -28,11 +28,43 @@ function defaultFormater(cost, billingType) {
     return "+$" + cost + "/" + billingType;
 }
 
+function createAttribution() {
+    const wrapper = document.createElement("div");
+    wrapper.innerHTML = "Challenge by <a class='attribution-lnk' href='" +
+        "https://www.frontendmentor.io?ref=challenge' target='_blank'>" +
+        "Frontend Mentor</a>. Coded by <a class='attribution-lnk' href='" +
+        "https://github.com/jay-ike' target='_blank'> Ndimah Tchougoua</a>";
+    wrapper.classList.add("attribution");
+    return wrapper;
+}
+function createThanks() {
+    let wrapper = document.createElement("div");
+    const img = document.createElement("img");
+    const heading = document.createElement("h2");
+    const paragraph = document.createElement("p");
+    heading.textContent = "Thank you!";
+    heading.classList.add("step__title");
+    img.setAttribute("src", "./assets/images/icon-thank-you.svg");
+    img.setAttribute(
+        "alt",
+        "an illustration presenting that everything is checked"
+    );
+    paragraph.textContent = "Thanks for confirming your subscription! We hope" +
+        "you have fun using our platform. If you ever need support, please" +
+        " feel free to email us at support@loremgaming.com.";
+    wrapper.classList.add("column", "thanks");
+    wrapper.appendChild(img);
+    wrapper.appendChild(heading);
+    wrapper.appendChild(paragraph);
+    wrapper.appendChild(createAttribution());
+    return wrapper;
+}
+
 function createRow() {
     let row = document.createElement("tr");
     let optionCost;
     let costFormater = defaultFormater;
-    Array.from(arguments).forEach(function (arg, index) {
+    Array.from(arguments).forEach(function (arg) {
         let cell = document.createElement("td");
         cell.appendChild(
             document.createTextNode(arg.toString())
@@ -71,13 +103,16 @@ function tableBuilder(initialPlan, billingType, addons) {
     const calculator = billCalculator();
     const button = document.createElement("button");
     let options = Array.from(addons).reduce(function (acc, addon) {
-        acc[addon.name] = sealer.seal(createRow(
+        let cost = Number.parseInt(addon.dataset.cost, 10);
+        let row = createRow(
             addon.dataset.name,
             "+$" + calculator.calculatePlan(
-                Number.parseInt(addon.dataset.cost, 10),
+                cost,
                 billingType.dataset.short
             ) + "/" + billingType.dataset.short
-        ));
+        );
+        row.updateCost(cost, billingType.dataset.short);
+        acc[addon.name] = sealer.seal(row);
         return acc;
     }, Object.create(null));
     let total = Number.parseInt(initialPlan.dataset.cost, 10);
@@ -199,6 +234,10 @@ function validateInputs(parent, onInvalid) {
 
 stepHandler.parent?.addEventListener("click", function ({target}) {
     let validated;
+    if (target.classList.contains("btn-confirm")) {
+        target.parentElement.previousElementSibling.replaceWith(createThanks());
+        target.parentElement.remove();
+    }
     if (target.classList.contains("prev-btn")) {
         stepHandler.previousStep();
     }
@@ -211,6 +250,9 @@ stepHandler.parent?.addEventListener("click", function ({target}) {
         if (validated) {
             stepHandler.nextStep();
         }
+    }
+    if (target.classList.contains("p-swap")) {
+        stepHandler.gotoStep(1);
     }
 
     //fallback for fireFox not supporting :has selector
@@ -266,6 +308,13 @@ document.addEventListener("DOMContentLoaded", function () {
                     desc: target.dataset.desc,
                     short: target.dataset.short
                 });
+                updateSumary();
+            }
+            if (target?.classList?.contains("plan-option") && target?.checked) {
+                checkoutTable.updatePlan(
+                    target.dataset.name,
+                    Number.parseInt(target.dataset.cost, 10)
+                );
                 updateSumary();
             }
         });
