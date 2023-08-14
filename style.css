@@ -108,7 +108,7 @@ legend {
     grid-template: var(--f-grid-temp);
     grid-template-areas: var(--f-grid-areas);
 	gap: 1rem;
-	min-height: 100vb;
+	min-height: 100dvb;
 }
 
 .indicators.indicators {
@@ -337,8 +337,8 @@ input[type="radio"]:not(:checked) + .toggle-label {
 	padding-inline: 0.75rem;
 	box-shadow: 1px 4px 8px 0px var(--light-gray);
 	position: relative;
-	max-height: 70vb;
-    overflow: hidden;
+	max-height: 70dvb;
+    overflow: hidden scroll;
 }
 .thanks {
     display: flex;
@@ -708,7 +708,7 @@ footer {
     .thanks {
         padding-inline-start: 0;
         box-shadow: none;
-        max-height: 80vb;
+        max-height: 80dvb;
     }
     .thanks {
         min-block-size: 100%;
@@ -752,7 +752,7 @@ footer {
     }
 
     .main-content {
-        min-height: 100vb;
+        min-height: 100dvb;
         display: grid;
         place-content: center;
     }
