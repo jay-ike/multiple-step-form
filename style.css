@@ -89,7 +89,6 @@ button[class] {
 }
 
 .input-label {
-  font-family: "Ubuntu";
   font-size: 0.85em;
   color: var(--marine-blue);
 }
@@ -303,7 +302,6 @@ input[type="radio"]:not(:checked) + .toggle-label {
 
 .s-indicator__desc:only-child {
 	display: none;
-	font-family: "Ubuntu-Bold";
 	color: var(--white);
 	font-weight: 700;
 	text-transform: uppercase;
@@ -351,7 +349,7 @@ input[type="radio"]:not(:checked) + .toggle-label {
     --gap: 1.5rem;
 }
 .step-out {
-	position: absolute;
+	position: fixed;
 	opacity: 0;
 	visibility: hidden;
 }
@@ -407,11 +405,11 @@ body {
 }
 
 .step__title {
-  font-family: "Ubuntu Bold";
-  color: var(--marine-blue);
-  line-height: 1.3;
-  letter-spacing: -0.2px;
-  font-size: clamp(1rem, 6vi, 2rem);
+    font-size: clamp(1rem, 6vi, 2rem);
+    font-family: "Ubuntu Bold";
+    color: var(--marine-blue);
+    line-height: 1.3;
+    letter-spacing: -0.2px;
 }
 
 .step__title + p {
