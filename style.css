@@ -336,7 +336,7 @@ input[type="radio"]:not(:checked) + .toggle-label {
 	box-shadow: 1px 4px 8px 0px var(--light-gray);
 	position: relative;
 	max-height: 70dvb;
-    overflow: hidden scroll;
+    overflow: hidden auto;
 }
 .thanks {
     display: flex;
