@@ -1,5 +1,16 @@
+/*jslint browser this*/
+import {SteppedForm, Stepper} from "./stepped-form.js";
 let stepHandler;
 let observer;
+const messages = {
+    attributions: "Challenge from <a href='https://www.frontendmentor.io?ref=" +
+    "challenge' target='_blank'>Frontend Mentor</a>. Coded by " +
+    "<a class='attribution-lnk' href='" +
+    "https://github.com/jay-ike' target='_blank'> Ndimah Tchougoua</a>",
+    thanks: "Thanks for confirming your subscription! We hope" +
+    "you have fun using our platform. If you ever need support, please" +
+    " feel free to email us at support@loremgaming.com."
+};
 function billCalculator() {
     let discounts = {
         mo: 11,
@@ -8,7 +19,7 @@ function billCalculator() {
     return Object.freeze({
         calculatePlan(planCost, billingType) {
             return planCost * (12 - discounts[billingType]);
-        },
+        }
     });
 }
 function sealerFactory() {
@@ -30,10 +41,7 @@ function defaultFormater(cost, billingType) {
 
 function createAttribution() {
     const wrapper = document.createElement("div");
-    wrapper.innerHTML = "Challenge by <a class='attribution-lnk' href='" +
-        "https://www.frontendmentor.io?ref=challenge' target='_blank'>" +
-        "Frontend Mentor</a>. Coded by <a class='attribution-lnk' href='" +
-        "https://github.com/jay-ike' target='_blank'> Ndimah Tchougoua</a>";
+    wrapper.innerHTML = messages.attributions;
     wrapper.classList.add("attribution");
     return wrapper;
 }
@@ -49,9 +57,7 @@ function createThanks() {
         "alt",
         "an illustration presenting that everything is checked"
     );
-    paragraph.textContent = "Thanks for confirming your subscription! We hope" +
-        "you have fun using our platform. If you ever need support, please" +
-        " feel free to email us at support@loremgaming.com.";
+    paragraph.textContent = messages.thanks;
     wrapper.classList.add("column", "thanks");
     wrapper.appendChild(img);
     wrapper.appendChild(heading);
@@ -60,31 +66,31 @@ function createThanks() {
     return wrapper;
 }
 
-function createRow() {
+function createCell(val) {
+    let cell = document.createElement("td");
+    cell.textContent = val;
+    return cell;
+}
+
+function createRow(name, cost) {
     let row = document.createElement("tr");
     let optionCost;
     let costFormater = defaultFormater;
-    Array.from(arguments).forEach(function (arg) {
-        let cell = document.createElement("td");
-        cell.appendChild(
-            document.createTextNode(arg.toString())
-        );
-        row.appendChild(cell);
-    });
+    row.appendChild(createCell(name));
+    row.appendChild(createCell(cost));
     row.updateCost = function (cost, billingType) {
         optionCost = Number.parseInt(cost.toString(), 10);
         this.lastElementChild.firstChild.nodeValue = costFormater(
             cost,
             billingType
         );
-            "/" + billingType;
     };
     row.updateDescription = function (desc) {
         this.firstElementChild.firstChild.nodeValue = desc;
     };
     row.getCost = function () {
         return optionCost;
-    }
+    };
     row.setFormater = function (fn) {
         costFormater = fn;
     };
@@ -138,8 +144,8 @@ function tableBuilder(initialPlan, billingType, addons) {
     table.addOption = function (name) {
         let row = sealer.unseal(options[name]);
         total += row.getCost();
-       body.appendChild(row);
-    }
+        body.appendChild(row);
+    };
     table.removeOption = function (name) {
         let row = sealer.unseal(options[name]);
         total -= row.getCost();
@@ -174,13 +180,13 @@ function tableBuilder(initialPlan, billingType, addons) {
         total += computedCost - headerRow.getCost();
         headerRow.updateCost(computedCost, currentBilling.short);
         headerRow.updateDescription(description);
-    }
+    };
     table.getTotal = function () {
         return total;
     };
     table.getBilling = function () {
         return currentBilling;
-    }
+    };
     return table;
 }
 
@@ -192,8 +198,8 @@ function indicatorUpdate(parent, currentIndex, nextIndex) {
 }
 stepHandler = new SteppedForm({
     indicatorUpdateFn: indicatorUpdate,
-    parentClass: "form",
-    outClassIndicator: "step-out"
+    outClassIndicator: "step-out",
+    parentClass: "form"
 });
 
 stepHandler.addIndexListener(function (nextIndex) {
@@ -275,7 +281,6 @@ stepHandler.parent?.addEventListener("input", function ({target}) {
     }
 });
 document.addEventListener("DOMContentLoaded", function () {
-    let observer;
     const form = stepHandler.parent;
     const recap = form.querySelector(".t-recap");
     const initialPlan = form.querySelector(".plan-option:checked");
@@ -287,16 +292,16 @@ document.addEventListener("DOMContentLoaded", function () {
     );
     function updateSumary() {
         let billing = checkoutTable.getBilling();
-        recap.firstElementChild.textContent = recap.dataset.desc +
-            " (" + billing.content + ")";
-        recap.lastElementChild.textContent = "$" + checkoutTable.getTotal() +
-            "/" + billing.short;
+        const content = recap.dataset.desc + " (" + billing.content + ")";
+        const total = "$" + checkoutTable.getTotal() + "/" + billing.short;
+        recap.firstElementChild.textContent = content;
+        recap.lastElementChild.textContent = total;
     }
     function observerCallback(mutationList) {
         Array.from(mutationList).forEach(function (mutation) {
             const {target} = mutation;
 
-            if (target?.classList?.contains?.("i-check")) {
+            if (target.classList.contains("i-check")) {
                 if (target.checked) {
                     checkoutTable.addOption(target.name);
                 } else {
@@ -304,7 +309,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 }
                 updateSumary();
             }
-            if (target?.classList?.contains?.("b-option") && target?.checked) {
+            if (target.classList.contains("b-option") && target.checked) {
                 checkoutTable.updateBilling({
                     content: target.dataset.content,
                     desc: target.dataset.desc,
@@ -330,3 +335,4 @@ document.addEventListener("DOMContentLoaded", function () {
         subtree: true
     });
 });
+window.customElements.define("step-by-step", Stepper);

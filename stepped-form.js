@@ -135,3 +135,20 @@ function SteppedForm({
     self.addIndexListener = addIndexListener;
     return self;
 }
+
+function buildTemplate() {
+    let template = document.createElement("template");
+    let container = document.createElement("div");
+    container.classList.add("step-container");
+    template.appendChild(container);
+    return template;
+}
+class Stepper extends HTMLElement {
+    constructor() {
+        super();
+        let template = buildTemplate().content;
+        const shadowRoot = this.attachShadow({mode: "open"});
+        shadowRoot.appendChild(template.cloneNode(true));
+    }
+}
+export {SteppedForm, Stepper}
