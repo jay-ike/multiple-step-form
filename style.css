@@ -325,7 +325,7 @@ input[type="radio"]:not(:checked) + .toggle-label {
     flex: 2;
 }
 
-.steps-wrapper,
+step-by-step,
 .thanks {
 	grid-area: steps;
 	align-self: start;
@@ -348,13 +348,13 @@ input[type="radio"]:not(:checked) + .toggle-label {
 .thanks > h2 {
     --gap: 1.5rem;
 }
-.step-out {
+step-by-step > .step-out {
 	position: fixed;
 	opacity: 0;
 	visibility: hidden;
 }
 
-.step {
+step-by-step > .step {
 	--gap: 0.75rem;
 	border: none;
 	padding-inline: 0;
@@ -362,7 +362,7 @@ input[type="radio"]:not(:checked) + .toggle-label {
     margin-inline: 0;
     margin-block: 0;
     min-inline-size: auto;
-	transform: translateX(calc(calc(var(--i)  -  var(--current)) * 100%));
+	transform: translateX(calc(var(--i)  -  var(--current) * 100%));
 }
 
 .column > * + * {
@@ -702,7 +702,7 @@ footer {
         position: absolute;
     }
 
-    .steps-wrapper,
+    step-by-step,
     .thanks {
         padding-inline-start: 0;
         box-shadow: none;

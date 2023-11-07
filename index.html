@@ -3,8 +3,6 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <!-- displays site properly based on user's device -->
-
     <link
       rel="icon"
       type="image/png"
@@ -17,7 +15,7 @@
   </head>
   <body>
     <main class="main-content">
-      <form class="form" style="--current: 0">
+      <form class="form">
         <ul class="indicators">
           <li class="s-indicator step-active" style="--i: 0">
             <p class="s-indicator__desc">
@@ -40,7 +38,7 @@
             </p>
           </li>
         </ul>
-        <div class="steps-wrapper">
+        <step-by-step class="steps-wrapper" out-indicator="step-out">
             <fieldset class="step column" style="--i: 0">
                 <legend>
                     <div class="column">
@@ -303,7 +301,7 @@
                     <p class="t-recap__amt">$120/yr</p>
                 </div>
             </div>
-        </div>
+        </step-by-step>
         <div class="nav-btns">
             <button class="nav-btn prev-btn hidden" name="previous" type="button">
                 Go Back

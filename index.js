@@ -1,6 +1,6 @@
 /*jslint browser this*/
-import {SteppedForm, Stepper} from "./stepped-form.js";
-let stepHandler;
+import {Stepper} from "./stepped-form.js";
+let components = {};
 let observer;
 const messages = {
     attributions: "Challenge from <a href='https://www.frontendmentor.io?ref=" +
@@ -191,37 +191,32 @@ function tableBuilder(initialPlan, billingType, addons) {
 }
 
 
-function indicatorUpdate(parent, currentIndex, nextIndex) {
-    const stepIndicators = parent.querySelectorAll(".s-indicator") ?? [];
-    stepIndicators[currentIndex]?.classList.remove("step-active");
-    stepIndicators[nextIndex]?.classList.add("step-active");
-}
-stepHandler = new SteppedForm({
-    indicatorUpdateFn: indicatorUpdate,
-    outClassIndicator: "step-out",
-    parentClass: "form"
-});
+components.form = document.querySelector("form.form");
+components.stepper = document.querySelector("step-by-step");
+components.indicators = components.form.querySelectorAll(".s-indicator");
+components.checks = components.form.querySelectorAll(".i-check");
+components.prevBtn = components.form.elements.previous;
+components.nextBtn = components.form.elements.next;
+components.stepper.addEventListener("indexupdated", function ({detail}) {
+    const {current, previous} = detail;
 
-stepHandler.addIndexListener(function (nextIndex) {
-    const prevBtn = stepHandler.parent?.elements?.previous;
-    const nextBtn = stepHandler.parent?.elements?.next;
-    if (prevBtn !== undefined && nextIndex > 0) {
-        prevBtn?.classList?.remove("hidden");
-    }
-    if (nextIndex === 0) {
-        prevBtn?.classList?.add("hidden");
-    }
-    if (nextIndex === 3) {
-        nextBtn?.classList?.replace("btn-primary", "btn-confirm");
-        nextBtn?.classList?.remove("next-btn");
-        nextBtn.innerText = "confirm";
-    }
-    if (nextIndex < 3) {
-        nextBtn?.classList?.replace("btn-confirm", "btn-primary");
-        nextBtn?.classList.add("next-btn");
-        nextBtn.innerText = "next step";
+    if (current > 0) {
+        components.prevBtn.classList.remove("hidden");
+    } else {
+        components.prevBtn.classList.add("hidden");
     }
 
+    if (current === components.indicators.length - 1) {
+        components.nextBtn.classList.remove("btn-primary", "next-btn");
+        components.nextBtn.classList.add("btn-confirm");
+        components.nextBtn.innerText = "confirm";
+    } else {
+        components.nextBtn.classList.remove("btn-confirm");
+        components.nextBtn.classList.add("btn-primary", "next-btn");
+        components.nextBtn.innerText = "next step";
+    }
+    components.indicators[previous].classList.remove("step-active");
+    components.indicators[current].classList.add("step-active");
 });
 
 function validateInputs(parent, onInvalid) {
@@ -238,14 +233,14 @@ function validateInputs(parent, onInvalid) {
     return validated;
 }
 
-stepHandler.parent?.addEventListener("click", function ({target}) {
+components.form.addEventListener("click", function ({target}) {
     let validated;
     if (target.classList.contains("btn-confirm")) {
         target.parentElement.previousElementSibling.replaceWith(createThanks());
         target.parentElement.remove();
     }
     if (target.classList.contains("prev-btn")) {
-        stepHandler.previousStep();
+        components.stepper.previousStep();
     }
 
     if (target.classList.contains("next-btn")) {
@@ -254,11 +249,11 @@ stepHandler.parent?.addEventListener("click", function ({target}) {
         });
 
         if (validated) {
-            stepHandler.nextStep();
+            components.stepper.nextStep();
         }
     }
     if (target.classList.contains("p-swap")) {
-        stepHandler.gotoStep(1);
+        components.stepper.gotoStep(1);
     }
 
     //fallback for fireFox not supporting :has selector
@@ -270,7 +265,7 @@ stepHandler.parent?.addEventListener("click", function ({target}) {
     }
 });
 
-stepHandler.parent?.addEventListener("input", function ({target}) {
+components.form.addEventListener("input", function ({target}) {
 
     target.classList.remove("input-error");
 
@@ -281,14 +276,13 @@ stepHandler.parent?.addEventListener("input", function ({target}) {
     }
 });
 document.addEventListener("DOMContentLoaded", function () {
-    const form = stepHandler.parent;
-    const recap = form.querySelector(".t-recap");
-    const initialPlan = form.querySelector(".plan-option:checked");
-    const initialBilling = form.querySelector(".b-option:checked");
+    const recap = components.form.querySelector(".t-recap");
+    const initialPlan = components.form.querySelector(".plan-option:checked");
+    const initialBilling = components.form.querySelector(".b-option:checked");
     const checkoutTable = tableBuilder(
         initialPlan,
         initialBilling,
-        form.querySelectorAll(".i-check")
+        components.checks
     );
     function updateSumary() {
         let billing = checkoutTable.getBilling();
@@ -300,7 +294,6 @@ document.addEventListener("DOMContentLoaded", function () {
     function observerCallback(mutationList) {
         Array.from(mutationList).forEach(function (mutation) {
             const {target} = mutation;
-
             if (target.classList.contains("i-check")) {
                 if (target.checked) {
                     checkoutTable.addOption(target.name);
@@ -329,10 +322,10 @@ document.addEventListener("DOMContentLoaded", function () {
     updateSumary();
     recap.parentElement.insertBefore(checkoutTable, recap);
     observer = new MutationObserver(observerCallback);
-    observer.observe(stepHandler.parent, {
+    observer.observe(components.form, {
         attributes: true,
         childList: true,
         subtree: true
     });
 });
-window.customElements.define("step-by-step", Stepper);
+Stepper.define();
