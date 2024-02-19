@@ -23,7 +23,7 @@ p {
 }
 
 img {
-  max-width: 100%;
+  max-inline-size: 100%;
   height: auto;
   display: block;
 }
@@ -159,6 +159,7 @@ legend {
   border-radius: 0.5rem;
   position: relative;
   z-index: 0;
+  gap: min(16px, 1.5em);
 }
 
 .toggle-label {
@@ -175,11 +176,10 @@ legend {
 
 .toggle {
   position: relative;
-  width: 3rem;
-  height: 1.5rem;
+  min-inline-size: 3rem;
+  aspect-ratio: 2;
   background-color: var(--toggle-clr);
   border-radius: 1rem;
-  margin-inline: 1.5rem;
   order: 0;
 }
 
@@ -193,7 +193,7 @@ input[value="year"]:checked ~ .toggle {
 .toggle::before {
   content: "";
   position: absolute;
-  width: 1rem;
+  inline-size: 1rem;
   top: 0.2rem;
   left: 0.25rem;
   aspect-ratio: 1;
@@ -209,14 +209,14 @@ input[type="radio"]:not(:checked) + .toggle-label {
 
 .i-container {
   position: relative;
-  width: 1.25rem;
+  inline-size: 1.25rem;
   height: 1.25rem;
   isolation: isolate;
   grid-area: check;
 }
 
 .i-check {
-  width: 100%;
+  inline-size: 100%;
   height: 100%;
   z-index: 0;
   position: absolute;
@@ -231,7 +231,7 @@ input[type="radio"]:not(:checked) + .toggle-label {
 }
 
 .addon-check {
-  width: 100%;
+  inline-size: 100%;
   height: 100%;
   border-radius: 0.25rem;
   border: 1px solid var(--cool-gray);
@@ -378,7 +378,7 @@ body {
 .text-input {
   --gap: .25rem;
   font-size: 1.25em;
-  max-width: 100%;
+  max-inline-size: 100%;
   min-height: 3rem;
   padding-inline: .5rem;
   border: solid 1px var(--plan-border, var(--light-gray));
@@ -552,7 +552,7 @@ input[type="radio"]:checked + .plan__title {
   padding-inline: 1rem;
   padding-block: 0.75rem;
   border-radius: 0.5rem;
-  min-width: 5rem;
+  min-inline-size: 5rem;
   text-transform: capitalize;
 }
 
@@ -608,7 +608,7 @@ footer {
 }
 .t-checkout {
     --gap: 1.5rem;
-    width: 100%;
+    inline-size: 100%;
     color: var(--marine-blue);
     background-color: var(--alabaster-clr);
     border-radius: .5rem;
@@ -684,7 +684,7 @@ footer {
 
     .text-input {
         min-height: 4rem;
-        min-width: 100%;
+        min-inline-size: 100%;
     }
     .s-indicator {
         display: inline-grid;
@@ -741,8 +741,8 @@ footer {
 @media screen  and (min-width: 900px){
     .form {
         --col-width: 8rem;
-        width: 875px;
-        min-height: min-content;
+        inline-size: 875px;
+        min-block-size: min-content;
         gap: 1rem 3rem;
         padding-inline-end: 3rem;
         border-radius: .5rem;
@@ -750,7 +750,7 @@ footer {
     }
 
     .main-content {
-        min-height: 100dvb;
+        min-block-size: 100lvb;
         display: grid;
         place-content: center;
     }
